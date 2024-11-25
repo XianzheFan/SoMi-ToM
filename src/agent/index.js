@@ -1,6 +1,7 @@
 import { AgentWrapper } from './agent_wrapper.js';
+import path from 'path';
 
-const profile_fp = 'E:/studyfxz/mindcraft-agent-chat/andy.json';
+const profile_fp = path.join(path.resolve(), 'andy.json');
 const websocketUrl = 'ws://localhost:8080';
 
 (async () => {
