@@ -64,7 +64,7 @@ export class AgentWrapper {
             this.websocket.send(JSON.stringify({ type: 'status', message: 'Agent connected' }));
         });
 
-        this.websocket.on('message', (data) => {
+        this.websocket.on('message', async (data) => {
             try {
                 const message = JSON.parse(data);
                 console.log('Received WebSocket message:', message);
@@ -72,6 +72,8 @@ export class AgentWrapper {
                 if (message.type === 'response') {
                     console.log('Server response received:', message.message);
                     this.serverResponse = message.message;
+
+                    this.agent.bot.chat(`Server says: ${message.message}`); // Send a message in Minecraft
 
                     // If there is a pending Promise, trigger it immediately
                     if (this.pendingResponse) {
