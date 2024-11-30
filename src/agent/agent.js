@@ -12,7 +12,7 @@ import { isOtherAgent, initConversationManager, sendToBot, endAllChats, response
 import { handleTranslation, handleEnglishTranslation } from '../utils/translator.js';
 import { addViewer } from './viewer.js';
 import settings from '../../settings.js';
-import { serverProxy } from './server_proxy.js';
+// import { serverProxy } from './server_proxy.js';
 
 export class Agent {
     async start(profile_fp, load_mem=false, init_message=null, count_id=0) {
@@ -23,7 +23,7 @@ export class Agent {
             }
 
             // Connect to MindServer via proxy
-            serverProxy.connect();
+            // serverProxy.connect();
             
             console.log('Starting agent initialization with profile:', profile_fp);
             
@@ -46,7 +46,7 @@ export class Agent {
             initConversationManager(this);
             
             // After getting the name, register with MindServer via proxy
-            serverProxy.registerAgent(this.name);
+            // serverProxy.registerAgent(this.name);
             
             console.log('Initializing examples...');
             await this.prompter.initExamples();

@@ -2,7 +2,9 @@ import { AgentWrapper } from './agent_wrapper.js';
 import path from 'path';
 
 const profile_fp = path.join(path.resolve(), 'andy.json');
-const websocketUrl = 'ws://localhost:8080';
+// const websocketUrl = 'ws://localhost:8080';
+const clientId = 'andy_client';
+const websocketUrl = `ws://localhost:8080/ws/${clientId}`;
 
 (async () => {
     const agentWrapper = new AgentWrapper(profile_fp, websocketUrl);
