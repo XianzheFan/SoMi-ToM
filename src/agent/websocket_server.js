@@ -1,12 +1,23 @@
 import { WebSocketServer } from 'ws';
+import url from 'url';
+
 const wss = new WebSocketServer({ port: 8080 }, () => {
     console.log('WebSocket server started on ws://localhost:8080');
 });
 
-// Processing connection
-wss.on('connection', (ws) => {
-    console.log('New client connected.');
-    ws.send(JSON.stringify({ type: 'status', message: 'Welcome to the WebSocket server!' }));
+wss.on('connection', (ws, req) => {
+    const pathname = url.parse(req.url).pathname;
+
+    if (!pathname.startsWith('/ws/')) {
+        console.log('Invalid client path:', pathname);
+        ws.close(4000, 'Invalid WebSocket path');
+        return;
+    }
+
+    const clientId = pathname.replace('/ws/', '');
+    console.log(`New client connected: ${clientId}`);
+
+    ws.send(JSON.stringify({ type: 'status', message: `Welcome, ${clientId}, to the WebSocket server!` }));
 
     // Receiving messages from the client
     ws.on('message', (message) => {
@@ -33,7 +44,7 @@ wss.on('connection', (ws) => {
     });
 
     ws.on('close', () => {
-        console.log('Client disconnected.');
+        console.log(`Client disconnected: ${clientId}`);
     });
 
     ws.on('error', (error) => {
