@@ -81,6 +81,19 @@ export class AgentWrapper {
                         this.pendingResponse(message.message);
                         this.pendingResponse = null; // Clear pendingResponse to prevent duplicate triggers
                     }
+                } else if (message.type === 'agent_message') {
+                    const parsedMessage = JSON.parse(message.message);
+                    if (parsedMessage.data && parsedMessage.data.argument) {
+                        console.log('Agent action received:', parsedMessage.data.argument);
+                        this.agent.bot.chat(`Agent ${message.agent} says: ${parsedMessage.data.argument}`);
+
+                        if (this.pendingResponse) {
+                            this.pendingResponse(parsedMessage.data.argument);
+                            this.pendingResponse = null;
+                        }
+                    } else {
+                        console.warn('Malformed agent_message format:', message.message);
+                    }
                 } else {
                     console.warn('Unknown message type:', message.type);
                 }

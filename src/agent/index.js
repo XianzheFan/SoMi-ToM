@@ -8,7 +8,6 @@ const websocketUrl = `ws://localhost:8080/ws/${clientId}`;
 (async () => {
     const agentWrapper = new AgentWrapper(profile_fp, websocketUrl);
     await agentWrapper.initialize(true, 'Agent initialized', 1);
-
     process.on('SIGINT', () => {
         console.log('Gracefully shutting down...');
         agentWrapper.disconnectWebSocket();
