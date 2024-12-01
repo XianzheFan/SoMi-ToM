@@ -17,7 +17,7 @@
 - `Why I added the api key but still prompted that the key can't be found?`
   - Possible reason 1: Did not modify keys.example.json to keys.json.
   - Possible reason 2: If you use vscode to edit, you need to `ctrl+s` to save the file for the changes to take effect.
-  - Possible reason 3: Not setting the code path correctly in setting.js, use andy.js by default. 
+  - Possible reason 3: Not setting the code path correctly in setting.js, use Jack.js by default. 
 
 # Common Questions
 - Mod Support? Mindcraft only supports client-side mods like optifine and sodium, though they can be tricky to set up. Mods that change minecraft game mechanics are not supported.

@@ -21,7 +21,7 @@ Do not connect this bot to public servers with coding enabled. This project allo
 
 2. Clone or download this repository (big green button)
 
-3. Rename `keys.example.json` to `keys.json` and fill in your API keys (you only need one). The desired model is set in `andy.json` or other profiles. For other models refer to the table below.
+3. Rename `keys.example.json` to `keys.json` and fill in your API keys (you only need one). The desired model is set in `Jack.json` or other profiles. For other models refer to the table below.
 
 4. In terminal/command prompt, run `npm install` from the installed directory
 
@@ -35,7 +35,7 @@ If you encounter issues, check the [FAQ](https://github.com/kolbytn/mindcraft/bl
 
 You can configure project details in `settings.js`. [See file.](settings.js)
 
-You can configure the agent's name, model, and prompts in their profile like `andy.json`.
+You can configure the agent's name, model, and prompts in their profile like `Jack.json`.
 
 | API | Config Variable | Example Model name | Docs |
 |------|------|------|------|
@@ -88,7 +88,7 @@ To connect to an unsupported minecraft version, you can try to use [viaproxy](se
 
 ## Bot Profiles
 
-Bot profiles are json files (such as `andy.json`) that define:
+Bot profiles are json files (such as `Jack.json`) that define:
 
 1. Bot backend LLMs to use for chat and embeddings.
 2. Prompts used to influence the bot's behavior.
@@ -99,7 +99,7 @@ Bot profiles are json files (such as `andy.json`) that define:
 By default, the program will use the profiles specified in `settings.js`. You can specify one or more agent profiles using the `--profiles` argument:
 
 ```bash
-node main.js --profiles ./profiles/andy.json ./profiles/jill.json
+node main.js --profiles ./profiles/Jack.json ./profiles/jill.json
 ```
 
 ### Model Specifications

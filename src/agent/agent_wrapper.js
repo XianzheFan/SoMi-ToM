@@ -82,11 +82,11 @@ export class AgentWrapper {
                         this.pendingResponse = null; // Clear pendingResponse to prevent duplicate triggers
                     }
                 } else if (message.type === 'agent_message') {
-                    const parsedMessage = JSON.parse(message.message);
+                    // const parsedMessage = JSON.parse(message.message);
+                    const parsedMessage = { data: { argument: message.message } };
                     if (parsedMessage.data && parsedMessage.data.argument) {
                         console.log('Agent action received:', parsedMessage.data.argument);
-                        this.agent.bot.chat(`Agent ${message.agent} says: ${parsedMessage.data.argument}`);
-
+                        this.agent.bot.chat(`${parsedMessage.data.argument}`);
                         if (this.pendingResponse) {
                             this.pendingResponse(parsedMessage.data.argument);
                             this.pendingResponse = null;

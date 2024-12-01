@@ -12,8 +12,9 @@ export default
     "mindserver_port": 8080,
     
     "profiles": [
-        "./andy.json",
-        "./randy.json",
+        "./Jack.json",
+        "./Jane.json",
+        "./John.json",
         // "./profiles/gpt.json",
         // "./profiles/claude.json",
         // "./profiles/gemini.json",
