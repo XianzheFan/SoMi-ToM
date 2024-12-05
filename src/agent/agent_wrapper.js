@@ -1,5 +1,6 @@
 import { Agent } from './agent.js';
 import WebSocket from 'ws';
+import { containsCommand, executeCommand } from './commands/index.js';
 
 export class AgentWrapper {
     constructor(profile_fp, websocketUrl) {
@@ -33,7 +34,7 @@ export class AgentWrapper {
                 return response;
             }
 
-            console.log('Triggering pendingResponse with:', message.message);
+            // console.log('Triggering pendingResponse with:', message.message);
             const serverResponse = await new Promise((resolve) => {
                 this.pendingResponse = resolve; // Save the resolve function for triggering by the server message
                 setTimeout(() => {
@@ -82,11 +83,45 @@ export class AgentWrapper {
                         this.pendingResponse = null; // Clear pendingResponse to prevent duplicate triggers
                     }
                 } else if (message.type === 'agent_message') {
-                    // const parsedMessage = JSON.parse(message.message);
                     const parsedMessage = { data: { argument: message.message } };
                     if (parsedMessage.data && parsedMessage.data.argument) {
                         console.log('Agent action received:', parsedMessage.data.argument);
                         this.agent.bot.chat(`${parsedMessage.data.argument}`);
+
+                        // let modifiedArgument = parsedMessage.data.argument;
+                        // let modifiedArgument = 'hello';
+                        // modifiedArgument += ' !collectBlocks("dirt", 10)'; // test
+
+                        // let command = containsCommand(modifiedArgument);
+                        // if (command)
+                            // console.log(`Detected command: ${command}`);
+                            // let execute_res = await executeCommand(this.agent, 'Let me collect more oak logs! !collectBlocks("oak_log", 1)');
+                            // let execute_res = await executeCommand(this.agent, '!collectBlocks("dirt", 10)');
+
+                            // let execute_res = await executeCommand(this.agent, modifiedArgument);
+                            // if (execute_res) {
+                            //     console.log(`Executed command: ${execute_res}`);
+                                // this.agent.bot.chat(execute_res);
+                                // this.routeResponse('system', execute_res);
+                            // } else {
+                            //     console.warn('Failed to execute command.');
+                            // }
+
+                        // // const command = containsCommand(modifiedArgument);
+                        // // const command = containsCommand(parsedMessage.data.argument);
+                        // if (command) {
+                        //     console.log(`Detected command: ${command}`);
+                        //     let execute_res = await executeCommand(this.agent, '!collectBlocks("dirt", 10)');
+                        //     // let execute_res = await executeCommand(this.agent, modifiedArgument);
+                        //     if (execute_res) {
+                        //         console.log(`Executed command: ${execute_res}`);
+                        //         this.agent.bot.chat(execute_res);
+                        //         this.routeResponse('system', execute_res);
+                        //     } else {
+                        //         console.warn('Failed to execute command.');
+                        //     }
+                        // }
+
                         if (this.pendingResponse) {
                             this.pendingResponse(parsedMessage.data.argument);
                             this.pendingResponse = null;
