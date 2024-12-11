@@ -216,7 +216,7 @@ export class Agent {
                     this.history.add(source, message);
                 }
                 let execute_res = await executeCommand(this, message);
-                if (execute_res) 
+                if (execute_res)
                     this.routeResponse(source, execute_res);
                 return true;
             }

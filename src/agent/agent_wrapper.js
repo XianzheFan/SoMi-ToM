@@ -89,15 +89,15 @@ export class AgentWrapper {
                         this.agent.bot.chat(`${parsedMessage.data.argument}`);
 
                         let modifiedArgument = parsedMessage.data.argument;
-                        modifiedArgument += ' !collectBlocks("dirt", 10)'; // test
+                        // modifiedArgument += ' !collectBlocks("dirt", 10)'; // test
 
                         let command = containsCommand(modifiedArgument);
                         if (command) {
                             console.log(`Detected command: ${command}`);
                             let execute_res = await executeCommand(this.agent, modifiedArgument);
                             if (execute_res) {
-                                console.log(`!!!!Executed command: ${execute_res}`);
-                                this.agent.bot.chat(execute_res);
+                                console.log(`Executed command: ${execute_res}`);
+                                this.routeResponse(this.agent.name, execute_res);
                                 // this.routeResponse('system', execute_res);
                             } else {
                                 console.warn('Failed to execute command.');
@@ -111,7 +111,21 @@ export class AgentWrapper {
                     } else {
                         console.warn('Malformed agent_message format:', message.message);
                     }
-                } else {
+                } 
+                // else if (message.type === 'replace_prompt') {
+                //     // Call the replaceStrings function with the provided data
+                //     console.log('@@@@@@@@@@Received', replacedPrompt);
+                //     const { prompt, messages, convo_examples } = message.data;
+                //     const replacedPrompt = await this.agent.prompter.replaceStrings(prompt, messages, convo_examples);
+                //     console.log('################Replaced prompt:', replacedPrompt);
+        
+                //     // Send back the modified prompt to the server
+                //     this.websocket.send(JSON.stringify({
+                //         type: 'replaced_prompt',
+                //         data: replacedPrompt,
+                //     }));
+                // } 
+                else {
                     console.warn('Unknown message type:', message.type);
                 }
             } catch (error) {
