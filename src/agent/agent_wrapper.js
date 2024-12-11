@@ -1,6 +1,6 @@
 import { Agent } from './agent.js';
 import WebSocket from 'ws';
-import { containsCommand, executeCommand } from './commands/index.js';
+import { containsCommand, executeCommand, getCommand } from './commands/index.js';
 
 export class AgentWrapper {
     constructor(profile_fp, websocketUrl) {
@@ -111,21 +111,26 @@ export class AgentWrapper {
                     } else {
                         console.warn('Malformed agent_message format:', message.message);
                     }
-                } 
-                // else if (message.type === 'replace_prompt') {
-                //     // Call the replaceStrings function with the provided data
-                //     console.log('@@@@@@@@@@Received', replacedPrompt);
-                //     const { prompt, messages, convo_examples } = message.data;
-                //     const replacedPrompt = await this.agent.prompter.replaceStrings(prompt, messages, convo_examples);
-                //     console.log('################Replaced prompt:', replacedPrompt);
-        
-                //     // Send back the modified prompt to the server
-                //     this.websocket.send(JSON.stringify({
-                //         type: 'replaced_prompt',
-                //         data: replacedPrompt,
-                //     }));
-                // } 
-                else {
+
+                    try {
+                        let stats = await getCommand('!stats').perform(this.agent);
+                        let inventory = await getCommand('!inventory').perform(this.agent);
+                        const serverPayload = {
+                            type: 'agent_data',
+                            stats: stats,
+                            inventory: inventory
+                        };
+                        if (this.websocket && this.websocket.readyState === WebSocket.OPEN) {
+                            this.websocket.send(JSON.stringify(serverPayload));
+                            console.log('Sent stats and inventory to server:', serverPayload);
+                        } else {
+                            console.warn('WebSocket is not open. Failed to send stats and inventory.');
+                        }
+                    } catch (error) {
+                        console.error('Error fetching or sending stats and inventory:', error);
+                    }
+
+                } else {
                     console.warn('Unknown message type:', message.type);
                 }
             } catch (error) {
