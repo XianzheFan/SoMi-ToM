@@ -25,7 +25,7 @@ Do not connect this bot to public servers with coding enabled. This project allo
 
 4. In terminal/command prompt, run `npm install` from the installed directory
 
-5. Start a minecraft world and open it to LAN on localhost port `55916`
+5. Start a minecraft world and open it to LAN on localhost port `50809`
 
 6. Run `node main.js` from the installed directory
 

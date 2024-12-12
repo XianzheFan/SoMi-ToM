@@ -4,7 +4,7 @@ uvicorn group_discussion_agents:app --reload --port 8080
 
 Minecraft Singleplayer 
 
-Open to LAN 55916
+Open to LAN 50809
 
 ```bash
 node src/agent/index.js
