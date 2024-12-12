@@ -10,7 +10,7 @@ let server;
 const connectedAgents = {};
 
 // Initialize the server
-export function createMindServer(port = 8080) {
+export function createMindServer(port = 8000) {
     const app = express();
     server = http.createServer(app);
     io = new Server(server);

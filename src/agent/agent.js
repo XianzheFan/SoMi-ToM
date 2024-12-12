@@ -77,6 +77,12 @@ export class Agent {
             this.bot.once('spawn', async () => {
                 try {
                     clearTimeout(spawnTimeout);
+                    const nameToId = {
+                        Jack: 0,
+                        Jane: 1,
+                        John: 2,
+                    };
+                    const count_id = nameToId[this.name] ?? -1;
                     addViewer(this.bot, count_id);
 
                     // wait for a bit so stats are not undefined
