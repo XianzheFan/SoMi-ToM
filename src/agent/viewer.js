@@ -2,6 +2,7 @@ import settings from '../../settings.js';
 import prismarineViewer from 'prismarine-viewer';
 import fs from 'fs';
 import puppeteer from 'puppeteer';
+import os from 'os';
 const mineflayerViewer = prismarineViewer.mineflayer;
 
 export function addViewer(bot, count_id) {
@@ -21,10 +22,23 @@ async function captureScreenshots(port, savePath, interval = 20000) {
     }
     let browser;
     let page;
+    const platform = os.platform();
+    let chromePath;
+    if (platform === 'win32') {
+        chromePath = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
+    } else if (platform === 'darwin') {
+        chromePath = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+    } else if (platform === 'linux') {
+        chromePath = '/usr/bin/google-chrome';
+    } else {
+        console.error(`Unsupported platform: ${platform}`);
+        return;
+    }
+
     try {
         try {
             browser = await puppeteer.launch({
-                executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
+                executablePath: chromePath,
                 headless: true
             });            
             page = await browser.newPage();
