@@ -36,21 +36,21 @@ async function captureScreenshots(port, savePath, interval = 20000) {
     }
 
     try {
-        try {
-            browser = await puppeteer.launch({
-                executablePath: chromePath,
-                headless: true
-            });            
-            page = await browser.newPage();
-            const url = `http://localhost:${port}`;
-            await page.goto(url, { waitUntil: 'networkidle2', timeout: 120000 });
-            console.log(`Connected to ${url}. Starting screenshot capture.`);
-        } catch (err) {
-            console.error('Error during Puppeteer setup:', err.message || err, err.stack || '');
-            return;
-        }
+        browser = await puppeteer.launch({
+            executablePath: chromePath,
+            headless: true
+        });            
+        page = await browser.newPage();
+        const url = `http://localhost:${port}`;
+        await page.goto(url, { waitUntil: 'networkidle2', timeout: 120000 });
+        console.log(`Connected to ${url}. Starting screenshot capture.`);
+
+        let capturing = false;
 
         setInterval(async () => {
+            if (capturing) return;
+            capturing = true;
+
             const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
             const screenshotPath = `${savePath}/screenshot_${timestamp}.png`;
             try {
@@ -58,6 +58,8 @@ async function captureScreenshots(port, savePath, interval = 20000) {
                 console.log(`Screenshot saved: ${screenshotPath}`);
             } catch (err) {
                 console.error('Failed to capture screenshot:', err);
+            } finally {
+                capturing = false;
             }
         }, interval);
     } catch (err) {
