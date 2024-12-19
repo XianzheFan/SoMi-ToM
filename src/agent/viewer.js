@@ -3,6 +3,9 @@ import prismarineViewer from 'prismarine-viewer';
 import fs from 'fs';
 import puppeteer from 'puppeteer';
 import os from 'os';
+import fetch from 'node-fetch';
+import { getKey } from '../utils/keys.js';
+
 const mineflayerViewer = prismarineViewer.mineflayer;
 
 export function addViewer(bot, count_id) {
@@ -11,12 +14,12 @@ export function addViewer(bot, count_id) {
         mineflayerViewer(bot, { port, firstPerson: true });
         console.log(`Viewer started at http://localhost:${port}`);
         const savePath = `screenshots/bot_${count_id}`;
-        const screenshotInterval = settings.screenshotInterval || 20000; // ms
-        captureScreenshots(port, savePath, screenshotInterval);
+        const screenshotInterval = settings.screenshotInterval || 30000; // ms
+        captureScreenshotsWithApi(port, savePath, screenshotInterval);
     }
 }
 
-async function captureScreenshots(port, savePath, interval = 20000) {
+async function captureScreenshotsWithApi(port, savePath, interval = 30000) {
     if (!fs.existsSync(savePath)) {
         fs.mkdirSync(savePath, { recursive: true });
     }
@@ -39,7 +42,7 @@ async function captureScreenshots(port, savePath, interval = 20000) {
         browser = await puppeteer.launch({
             executablePath: chromePath,
             headless: true
-        });            
+        });
         page = await browser.newPage();
         const url = `http://localhost:${port}`;
         await page.goto(url, { waitUntil: 'networkidle2', timeout: 120000 });
@@ -56,8 +59,12 @@ async function captureScreenshots(port, savePath, interval = 20000) {
             try {
                 await page.screenshot({ path: screenshotPath });
                 console.log(`Screenshot saved: ${screenshotPath}`);
+                
+                const base64Image = await encodeImageToBase64(screenshotPath);
+                const apiResponse = await callImageRecognitionApi(base64Image);
+                console.log(`Image recognition result: ${JSON.stringify(apiResponse)}`);
             } catch (err) {
-                console.error('Failed to capture screenshot:', err);
+                console.error('Failed to capture screenshot or call API:', err);
             } finally {
                 capturing = false;
             }
@@ -73,4 +80,61 @@ async function captureScreenshots(port, savePath, interval = 20000) {
         if (browser) await browser.close();
         process.exit();
     });
+}
+
+async function encodeImageToBase64(imagePath) {
+    return new Promise((resolve, reject) => {
+        fs.readFile(imagePath, (err, data) => {
+            if (err) return reject(err);
+            const base64Image = Buffer.from(data).toString('base64');
+            resolve(base64Image);
+        });
+    });
+}
+
+async function callImageRecognitionApi(base64Image) {
+    const apiEndpoint = 'https://api.openai.com/v1/chat/completions';
+    const apiKey = getKey('OPENAI_API_KEY');
+
+    const payload = {
+        model: "gpt-4o-mini",
+        messages: [
+            {
+                role: "user",
+                content: [
+                    {
+                        type: "text",
+                        text: "What is in this image?",
+                    },
+                    {
+                        type: "image_url",
+                        image_url: {
+                            url: `data:image/jpeg;base64,${base64Image}`,
+                        },
+                    },
+                ],
+            },
+        ],
+    };
+
+    const headers = {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${apiKey}`,
+    };
+
+    try {
+        const response = await fetch(apiEndpoint, {
+            method: "POST",
+            headers: headers,
+            body: JSON.stringify(payload),
+        });
+        if (!response.ok) {
+            throw new Error(`API call failed: ${response.statusText}`);
+        }
+        const data = await response.json();
+        return data;
+    } catch (err) {
+        console.error('Error calling image recognition API:', err);
+        throw err;
+    }
 }

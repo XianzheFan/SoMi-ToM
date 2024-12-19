@@ -40,6 +40,7 @@ export class GPT {
                 throw new Error('Context length exceeded'); 
             console.log('Received.')
             res = completion.choices[0].message.content;
+            console.log(res)
         }
         catch (err) {
             if ((err.message == 'Context length exceeded' || err.code == 'context_length_exceeded') && turns.length > 1) {
@@ -62,6 +63,3 @@ export class GPT {
         return embedding.data[0].embedding;
     }
 }
-
-
-

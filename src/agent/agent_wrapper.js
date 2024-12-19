@@ -70,19 +70,7 @@ export class AgentWrapper {
                 const message = JSON.parse(data);
                 console.log('Received WebSocket message:', message);
 
-                if (message.type === 'response') {
-                    console.log('Server response received:', message.message);
-                    this.serverResponse = message.message;
-
-                    this.agent.bot.chat(`Server says: ${message.message}`); // Send a message in Minecraft
-
-                    // If there is a pending Promise, trigger it immediately
-                    if (this.pendingResponse) {
-                        console.log('Triggering pendingResponse with:', message.message);
-                        this.pendingResponse(message.message);
-                        this.pendingResponse = null; // Clear pendingResponse to prevent duplicate triggers
-                    }
-                } else if (message.type === 'agent_message') {
+                if (message.type === 'agent_message') {
                     const parsedMessage = { data: { argument: message.message } };
                     if (parsedMessage.data && parsedMessage.data.argument) {
                         console.log('Agent action received:', parsedMessage.data.argument);
