@@ -83,7 +83,7 @@ export class Agent {
                         John: 2,
                     };
                     const count_id = nameToId[this.name] ?? -1;
-                    addViewer(this.bot, count_id);
+                    addViewer(this.bot, count_id, this.name);
 
                     // wait for a bit so stats are not undefined
                     await new Promise((resolve) => setTimeout(resolve, 1000));

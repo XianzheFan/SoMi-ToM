@@ -8,12 +8,12 @@ import { getKey } from '../utils/keys.js';
 
 const mineflayerViewer = prismarineViewer.mineflayer;
 
-export function addViewer(bot, count_id) {
+export function addViewer(bot, count_id, name) {
     if (settings.show_bot_views) {
         const port = 3000 + count_id;
         mineflayerViewer(bot, { port, firstPerson: true });
         console.log(`Viewer started at http://localhost:${port}`);
-        const savePath = `screenshots/bot_${count_id}`;
+        const savePath = `screenshots/${name}`;
         const screenshotInterval = settings.screenshotInterval || 30000; // ms
         captureScreenshotsWithApi(port, savePath, screenshotInterval);
     }
@@ -59,10 +59,6 @@ async function captureScreenshotsWithApi(port, savePath, interval = 30000) {
             try {
                 await page.screenshot({ path: screenshotPath });
                 console.log(`Screenshot saved: ${screenshotPath}`);
-                
-                const base64Image = await encodeImageToBase64(screenshotPath);
-                const apiResponse = await callImageRecognitionApi(base64Image);
-                console.log(`Image recognition result: ${JSON.stringify(apiResponse)}`);
             } catch (err) {
                 console.error('Failed to capture screenshot or call API:', err);
             } finally {
@@ -82,7 +78,7 @@ async function captureScreenshotsWithApi(port, savePath, interval = 30000) {
     });
 }
 
-async function encodeImageToBase64(imagePath) {
+export async function encodeImageToBase64(imagePath) {
     return new Promise((resolve, reject) => {
         fs.readFile(imagePath, (err, data) => {
             if (err) return reject(err);
@@ -92,7 +88,7 @@ async function encodeImageToBase64(imagePath) {
     });
 }
 
-async function callImageRecognitionApi(base64Image) {
+export async function callImageRecognitionApi(base64Image) {
     const apiEndpoint = 'https://api.openai.com/v1/chat/completions';
     const apiKey = getKey('OPENAI_API_KEY');
 
@@ -102,16 +98,8 @@ async function callImageRecognitionApi(base64Image) {
             {
                 role: "user",
                 content: [
-                    {
-                        type: "text",
-                        text: "What is in this image?",
-                    },
-                    {
-                        type: "image_url",
-                        image_url: {
-                            url: `data:image/jpeg;base64,${base64Image}`,
-                        },
-                    },
+                    { type: "text", text: "What is in this image?", },
+                    { type: "image_url", image_url: { url: `data:image/jpeg;base64,${base64Image}`, }, },
                 ],
             },
         ],
