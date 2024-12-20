@@ -3,7 +3,7 @@ import WebSocket from 'ws';
 import fs from 'fs';
 import path from 'path';
 import { containsCommand, executeCommand, getCommand } from './commands/index.js';
-import { encodeImageToBase64, callImageRecognitionApi } from './viewer.js';
+import { encodeImageToBase64, callImageRecognitionApi, stopRecording } from './viewer.js';
 
 export class AgentWrapper {
     constructor(profile_fp, websocketUrl) {
@@ -153,7 +153,7 @@ export class AgentWrapper {
                         };
                         if (this.websocket && this.websocket.readyState === WebSocket.OPEN) {
                             this.websocket.send(JSON.stringify(serverPayload));
-                            console.log('Sent stats and inventory to server:', serverPayload);
+                            console.log('Sent stats, inventory, and visionResponse to server:', serverPayload);
                         } else {
                             console.warn('WebSocket is not open. Failed to send stats and inventory.');
                         }
@@ -171,10 +171,12 @@ export class AgentWrapper {
 
         this.websocket.on('close', () => {
             console.log('WebSocket connection closed.');
+            stopRecording(`temp_screenshots/${this.agent.name}`, `screenshots/${this.agent.name}`);
         });
 
         this.websocket.on('error', (error) => {
             console.error('WebSocket error:', error);
+            stopRecording(`temp_screenshots/${this.agent.name}`, `screenshots/${this.agent.name}`);
         });
     }
 

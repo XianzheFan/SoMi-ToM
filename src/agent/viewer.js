@@ -1,10 +1,12 @@
 import settings from '../../settings.js';
 import prismarineViewer from 'prismarine-viewer';
 import fs from 'fs';
+import path from 'path';
 import puppeteer from 'puppeteer';
 import os from 'os';
 import fetch from 'node-fetch';
 import { getKey } from '../utils/keys.js';
+import { exec } from 'child_process';
 
 const mineflayerViewer = prismarineViewer.mineflayer;
 
@@ -14,15 +16,23 @@ export function addViewer(bot, count_id, name) {
         mineflayerViewer(bot, { port, firstPerson: true });
         console.log(`Viewer started at http://localhost:${port}`);
         const savePath = `screenshots/${name}`;
-        const screenshotInterval = settings.screenshotInterval || 30000; // ms
-        captureScreenshotsWithApi(port, savePath, screenshotInterval);
+        const tempPath = `temp_screenshots/${name}`;
+        const screenshotInterval = 2000; // 2 seconds for video
+        const saveInterval = 30000; // 30 seconds for saving
+        captureScreenshotsWithApi(port, savePath, tempPath, screenshotInterval, saveInterval);
     }
 }
 
-async function captureScreenshotsWithApi(port, savePath, interval = 30000) {
+let isRecording = true;
+
+async function captureScreenshotsWithApi(port, savePath, tempPath, screenshotInterval = 2000, saveInterval = 30000) {
     if (!fs.existsSync(savePath)) {
         fs.mkdirSync(savePath, { recursive: true });
     }
+    if (!fs.existsSync(tempPath)) {
+        fs.mkdirSync(tempPath, { recursive: true, mode: 0o777 });
+    }
+
     let browser;
     let page;
     const platform = os.platform();
@@ -41,40 +51,73 @@ async function captureScreenshotsWithApi(port, savePath, interval = 30000) {
     try {
         browser = await puppeteer.launch({
             executablePath: chromePath,
-            headless: true
+            headless: true,
+            args: ['--no-sandbox', '--disable-setuid-sandbox']
         });
         page = await browser.newPage();
         const url = `http://localhost:${port}`;
         await page.goto(url, { waitUntil: 'networkidle2', timeout: 120000 });
         console.log(`Connected to ${url}. Starting screenshot capture.`);
 
-        let capturing = false;
+        let lastSaveTime = 0;
 
-        setInterval(async () => {
-            if (capturing) return;
-            capturing = true;
+        const screenshotIntervalId = setInterval(async () => {
+            if (!isRecording) {
+                clearInterval(screenshotIntervalId);
+                await generateVideoFromFileList(`${tempPath}/file_list.txt`, `${savePath}/output_video.mp4`);
+                if (browser) await browser.close();
+                return;
+            }
 
             const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-            const screenshotPath = `${savePath}/screenshot_${timestamp}.png`;
+            const tempScreenshotPath = path.join(tempPath, `screenshot_${timestamp}.png`);
+            const saveScreenshotPath = path.join(savePath, `screenshot_${timestamp}.png`);
+
             try {
-                await page.screenshot({ path: screenshotPath });
-                console.log(`Screenshot saved: ${screenshotPath}`);
+                await page.screenshot({ path: tempScreenshotPath });
+                console.log(`Temporary screenshot saved: ${tempScreenshotPath}`);
+
+                const currentTime = Date.now();
+                if (currentTime - lastSaveTime >= saveInterval) {
+                    fs.copyFileSync(tempScreenshotPath, saveScreenshotPath);
+                    lastSaveTime = currentTime;
+                    console.log(`Saved screenshot for record: ${saveScreenshotPath}`);
+                }
             } catch (err) {
-                console.error('Failed to capture screenshot or call API:', err);
-            } finally {
-                capturing = false;
+                // console.error('Failed to capture screenshot:', err);
             }
-        }, interval);
+        }, screenshotInterval);
     } catch (err) {
         console.error('Error during Puppeteer setup:', err);
         if (browser) await browser.close();
-        return;
     }
+}
 
-    process.on('SIGINT', async () => {
-        console.log('Shutting down Puppeteer...');
-        if (browser) await browser.close();
-        process.exit();
+export function stopRecording(tempPath, savePath) {
+    isRecording = false;
+    setTimeout(() => {
+        console.log('Stopping recording and generating video...');
+        const listFile = path.join(tempPath, 'file_list.txt');
+        generateFileList(tempPath, listFile);
+        generateVideoFromFileList(listFile, `${savePath}/output_video.mp4`);
+    }, 1000); // Ensure all screenshot tasks are completed
+}
+
+function generateVideoFromFileList(listFile, outputVideoPath) {
+    return new Promise((resolve, reject) => {
+        const command = `ffmpeg -f concat -safe 0 -i ${listFile} -r 1 -c:v libx264 -pix_fmt yuv420p ${outputVideoPath}`; // 1 fps
+
+        exec(command, (error, stdout, stderr) => {
+            if (error) {
+                console.error(`Error generating video: ${stderr}`);
+                reject(error);
+            } else {
+                console.log(`Video generated successfully at: ${outputVideoPath}`);
+                resolve();
+            }
+        });
+    }).catch(err => {
+        console.error('Unhandled error in video generation:', err);
     });
 }
 
@@ -86,6 +129,17 @@ export async function encodeImageToBase64(imagePath) {
             resolve(base64Image);
         });
     });
+}
+
+function generateFileList(directory, listFile) {
+    const files = fs.readdirSync(directory)
+        .filter(file => file.endsWith('.png'))
+        .sort(); // Ensure the files are sorted by name
+    const fileContent = files
+        .map(file => `file '${path.resolve(directory, file).replace(/\\/g, '/')}'`)
+        .join('\n');
+    fs.writeFileSync(listFile, fileContent);
+    console.log(`Generated file list: ${listFile}`);
 }
 
 export async function callImageRecognitionApi(base64Image) {
