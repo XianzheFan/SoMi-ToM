@@ -135,11 +135,12 @@ export class AgentWrapper {
                         }
 
                         const screenshotPath = getLatestScreenshot(`screenshots/${this.agent.name}`);
-                        let apiResponse = "";
+                        let visionResponse = "";
                         if (screenshotPath) {
                             let base64Image = await encodeImageToBase64(screenshotPath);
-                            apiResponse = await callImageRecognitionApi(base64Image);
-                            console.log(apiResponse.choices[0].message.content);
+                            let apiResponse = await callImageRecognitionApi(base64Image);
+                            visionResponse = apiResponse.choices[0].message.content;
+                            console.log(visionResponse);
                         } else {
                             console.warn('No valid screenshot found. Skipping image recognition.');
                         }
@@ -147,7 +148,8 @@ export class AgentWrapper {
                         const serverPayload = {
                             type: 'agent_data',
                             stats: stats,
-                            inventory: inventory
+                            inventory: inventory,
+                            visionResponse: visionResponse
                         };
                         if (this.websocket && this.websocket.readyState === WebSocket.OPEN) {
                             this.websocket.send(JSON.stringify(serverPayload));
