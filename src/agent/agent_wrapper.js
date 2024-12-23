@@ -37,7 +37,6 @@ export class AgentWrapper {
                 return response;
             }
 
-            // console.log('Triggering pendingResponse with:', message.message);
             const serverResponse = await new Promise((resolve) => {
                 this.pendingResponse = resolve; // Save the resolve function for triggering by the server message
                 setTimeout(() => {
@@ -75,26 +74,25 @@ export class AgentWrapper {
 
                 if (message.type === 'agent_message') {
                     const parsedMessage = { data: { argument: message.message } };
+                    let codeOutput = 'Test output';
                     if (parsedMessage.data && parsedMessage.data.argument) {
                         console.log('Agent action received:', parsedMessage.data.argument);
                         this.agent.bot.chat(`${parsedMessage.data.argument}`);
 
                         let modifiedArgument = parsedMessage.data.argument;
-                        // modifiedArgument += ' !collectBlocks("dirt", 10)'; // test
-
                         let command = containsCommand(modifiedArgument);
                         if (command) {
                             console.log(`Detected command: ${command}`);
                             let execute_res = await executeCommand(this.agent, modifiedArgument);
                             if (execute_res) {
-                                console.log(`Executed command: ${execute_res}`);
-                                this.routeResponse(this.agent.name, execute_res);
-                                // this.routeResponse('system', execute_res);
+                                execute_res = execute_res.replace(/[\r\n]+/g, ' ');
+                                this.agent.bot.chat(execute_res);
+                                codeOutput = execute_res;
+                                console.log(codeOutput);
                             } else {
                                 console.warn('Failed to execute command.');
                             }
                         }
-
                         if (this.pendingResponse) {
                             this.pendingResponse(parsedMessage.data.argument);
                             this.pendingResponse = null;
@@ -102,7 +100,7 @@ export class AgentWrapper {
                     } else {
                         console.warn('Malformed agent_message format:', message.message);
                     }
-
+                    
                     try {
                         let stats = await getCommand('!stats').perform(this.agent);
                         let inventory = await getCommand('!inventory').perform(this.agent);
@@ -149,11 +147,12 @@ export class AgentWrapper {
                             type: 'agent_data',
                             stats: stats,
                             inventory: inventory,
-                            visionResponse: visionResponse
+                            visionResponse: visionResponse,
+                            codeOutput: codeOutput
                         };
                         if (this.websocket && this.websocket.readyState === WebSocket.OPEN) {
                             this.websocket.send(JSON.stringify(serverPayload));
-                            console.log('Sent stats, inventory, and visionResponse to server:', serverPayload);
+                            console.log('Sent stats, inventory, visionResponse and codeOutput to server:', serverPayload);
                         } else {
                             console.warn('WebSocket is not open. Failed to send stats and inventory.');
                         }

@@ -75,7 +75,7 @@ async function captureScreenshotsWithApi(port, savePath, tempPath, screenshotInt
 
             try {
                 await page.screenshot({ path: tempScreenshotPath });
-                console.log(`Temporary screenshot saved: ${tempScreenshotPath}`);
+                // console.log(`Temporary screenshot saved: ${tempScreenshotPath}`);
 
                 const currentTime = Date.now();
                 if (currentTime - lastSaveTime >= saveInterval) {
