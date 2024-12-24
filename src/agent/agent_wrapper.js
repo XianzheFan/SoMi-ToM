@@ -100,7 +100,7 @@ export class AgentWrapper {
                     } else {
                         console.warn('Malformed agent_message format:', message.message);
                     }
-                    
+
                     try {
                         let stats = await getCommand('!stats').perform(this.agent);
                         let inventory = await getCommand('!inventory').perform(this.agent);
