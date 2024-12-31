@@ -74,7 +74,7 @@ export class AgentWrapper {
 
                 if (message.type === 'agent_message') {
                     const parsedMessage = { data: { argument: message.message } };
-                    let codeOutput = 'Test output';
+                    let codeOutput = 'You did not take any action last time.';
                     if (parsedMessage.data && parsedMessage.data.argument) {
                         console.log('Agent action received:', parsedMessage.data.argument);
                         this.agent.bot.chat(`${parsedMessage.data.argument}`);
