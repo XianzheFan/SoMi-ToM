@@ -1,9 +1,8 @@
 import { Agent } from './agent.js';
 import WebSocket from 'ws';
 import fs from 'fs';
-import path from 'path';
 import { containsCommand, executeCommand, getCommand } from './commands/index.js';
-import { encodeImageToBase64, callImageRecognitionApi, stopRecording } from './viewer.js';
+import { stopRecording } from './viewer.js';
 
 export class AgentWrapper {
     constructor(profile_fp, websocketUrl) {
@@ -103,44 +102,21 @@ export class AgentWrapper {
 
                     try {
                         let stats = await getCommand('!stats').perform(this.agent);
-                        let inventory = await getCommand('!inventory').perform(this.agent);
+                        let inventory = await getCommand('!inventory').perform(this.agent);                    
 
-                        function getLatestScreenshot(directory) {
-                            try {
-                                const files = fs.readdirSync(directory);
-                                const screenshotFiles = files.filter(file => file.startsWith('screenshot_') && file.endsWith('.png'));
-
-                                if (screenshotFiles.length === 0) {
-                                    console.error('No screenshot files found.');
-                                    return null;
-                                }
-
-                                // Sort files by timestamp extracted from the filename
-                                const sortedFiles = screenshotFiles.sort((a, b) => {
-                                    const timestampA = a.match(/screenshot_(\d{4}-\d{2}-\d{2}T\d{2}-\d{2}-\d{2}-\d{3}Z)\.png/);
-                                    const timestampB = b.match(/screenshot_(\d{4}-\d{2}-\d{2}T\d{2}-\d{2}-\d{2}-\d{3}Z)\.png/);
-
-                                    if (!timestampA || !timestampB) {
-                                        throw new Error('Invalid file format.');
-                                    }
-                                    return new Date(timestampB[1]) - new Date(timestampA[1]);
-                                });
-                                return path.join(directory, sortedFiles[0]); // Latest screenshot
-                            } catch (error) {
-                                console.error('Error finding the latest screenshot:', error);
-                                return null;
-                            }
-                        }
-
-                        const screenshotPath = getLatestScreenshot(`screenshots/${this.agent.name}`);
-                        let visionResponse = "";
-                        if (screenshotPath) {
-                            let base64Image = await encodeImageToBase64(screenshotPath);
-                            let apiResponse = await callImageRecognitionApi(base64Image);
-                            visionResponse = apiResponse.choices[0].message.content;
-                            console.log(visionResponse);
+                        let visionResponse = '';
+                        let latestImageUri = '';
+                        if (fs.existsSync(`screenshots/${this.agent.name}/current_vision_response.txt`)) {
+                            visionResponse = fs.readFileSync(`screenshots/${this.agent.name}/current_vision_response.txt`, 'utf8');
+                            console.log('Vision Response:', visionResponse);
                         } else {
-                            console.warn('No valid screenshot found. Skipping image recognition.');
+                            console.log('File current_vision_response.txt not found, skipping...');
+                        }
+                        if (fs.existsSync(`screenshots/${this.agent.name}/current_image_url.txt`)) {
+                            latestImageUri = fs.readFileSync(`screenshots/${this.agent.name}/current_image_url.txt`, 'utf8');
+                            console.log('Latest Image URI:', latestImageUri);
+                        } else {
+                            console.log('File current_image_url.txt not found, skipping...');
                         }
 
                         const serverPayload = {
@@ -148,16 +124,17 @@ export class AgentWrapper {
                             stats: stats,
                             inventory: inventory,
                             visionResponse: visionResponse,
-                            codeOutput: codeOutput
+                            codeOutput: codeOutput,
+                            latestImageUri: latestImageUri
                         };
                         if (this.websocket && this.websocket.readyState === WebSocket.OPEN) {
                             this.websocket.send(JSON.stringify(serverPayload));
-                            console.log('Sent stats, inventory, visionResponse and codeOutput to server:', serverPayload);
+                            console.log('Sent stats, inventory, visionResponse, codeOutput and latestImageUri to server:', serverPayload);
                         } else {
-                            console.warn('WebSocket is not open. Failed to send stats and inventory.');
+                            console.warn('WebSocket is not open. Failed to send serverPayload.');
                         }
                     } catch (error) {
-                        console.error('Error fetching or sending stats and inventory:', error);
+                        console.error('Error fetching or sending serverPayload:', error);
                     }
 
                 } else {
