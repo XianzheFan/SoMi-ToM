@@ -26,3 +26,5 @@ for event in replicate.stream(
 # The image is a computer-generated scene featuring a group of people standing in a grassy area. 
 # There are four people in total, with one person standing near the center of the scene, another person on the left side, and two more people on the right side. They appear to be engaged in a conversation or interacting with each other.
 # In the scene, there are also a couple of chests, one located near the center and the other towards the right side. Additionally, there are two trees in the background, one on the left side and the other on the right side of the image.
+
+# finetune https://replicate.com/yorickvp/llava-13b/train

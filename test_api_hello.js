@@ -9,7 +9,7 @@ async function main() {
   try {
     const chatCompletion = await openai.chat.completions.create({
       messages: [{ role: 'user', content: 'Hello, please introduce yourself.' }],
-      model: 'gpt-3.5-turbo',
+      model: 'gpt-4',
     });
 
     console.log(chatCompletion.choices[0].message);
@@ -68,8 +68,8 @@ async function handleErrors() {
 async function run() {
   await main();
   await streamResponse();
-  await uploadFile();
-  await handleErrors();
+  // await uploadFile();
+  // await handleErrors();
 }
 
 run();

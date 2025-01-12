@@ -29,3 +29,5 @@ for event in replicate.stream(
 # At the bottom of the image, there is a chat overlay with text that reads: "Jack: Sounds good Jane! Craft those planks and share then when you're ready, and Jane, sounds like Jane is crafting too! Once Jack's chest is ready, we all set to place them then. 
 # Let me know if I need to help with anything." The text indicates that the characters are engaged in a conversation, possibly discussing gameplay or tasks within the game.
 # The overall style of the image is consistent with the game's aesthetic, which is known for its simplicity and focus on creativity and exploration.
+
+# finetune 

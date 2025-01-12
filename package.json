@@ -2,6 +2,7 @@
     "type": "module",
     "dependencies": {
         "@anthropic-ai/sdk": "^0.17.1",
+        "@google-cloud/storage": "^7.15.0",
         "@google/generative-ai": "^0.2.1",
         "@huggingface/inference": "^2.8.1",
         "express": "^4.18.2",
