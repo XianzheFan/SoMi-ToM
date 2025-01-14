@@ -18,15 +18,15 @@ export function addViewer(bot, count_id, name) {
         console.log(`Viewer started at http://localhost:${port}`);
         const savePath = `screenshots/${name}`;
         const tempPath = `temp_screenshots/${name}`;
-        const screenshotInterval = 2000; // 2 seconds for video
-        const saveInterval = 30000; // 30 seconds for saving
+        const screenshotInterval = 4000; // 4 seconds for video
+        const saveInterval = 32000; // 32 seconds for saving
         captureScreenshotsWithApi(port, savePath, tempPath, screenshotInterval, saveInterval);
     }
 }
 
 let isRecording = true;
 
-async function captureScreenshotsWithApi(port, savePath, tempPath, screenshotInterval = 2000, saveInterval = 20000) {
+async function captureScreenshotsWithApi(port, savePath, tempPath, screenshotInterval, saveInterval) {
     if (!fs.existsSync(savePath)) {
         fs.mkdirSync(savePath, { recursive: true });
     }
@@ -185,7 +185,7 @@ export async function callImageRecognitionApi(base64Image) {
             {
                 role: "user",
                 content: [
-                    { type: "text", text: "Please describe the environment in the image, including surrounding materials, blocks, tools, and the time (e.g., night or day). If you see a player, mention their name (John has purple hair and white clothes, Jane has dark brown hair and yellow clothes, Jack has black hair and green clothes) and describe the action they are performing.", },
+                    { type: "text", text: "Please describe the environment in the image, including surrounding materials, blocks, and tools. If you see a player, mention their name (John has purple hair and white clothes, Jane has dark brown hair and yellow clothes, Jack has black hair and green clothes) and describe the action they are performing.", },
                     { type: "image_url", image_url: { url: `data:image/jpeg;base64,${base64Image}`, }, },
                 ],
             },

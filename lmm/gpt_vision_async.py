@@ -14,7 +14,7 @@ def encode_image(image_path):
 async def main():
     async def openai_api_predict_async():
         response = await client.chat.completions.create(
-            model="gpt-4o-mini",
+            model="gpt-4o-2024-11-20",
             messages=[
                 {
                     "role": "user",

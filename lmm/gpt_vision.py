@@ -11,7 +11,7 @@ def encode_image(image_path):
         return base64.b64encode(image_file.read()).decode("utf-8")
 
 response = client.chat.completions.create(
-    model="gpt-4o-mini",
+    model="gpt-4o-2024-11-20",
     messages=[
         {
             "role": "user",

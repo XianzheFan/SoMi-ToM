@@ -39,7 +39,7 @@ You can configure the agent's name, model, and prompts in their profile like `Ja
 
 | API | Config Variable | Example Model name | Docs |
 |------|------|------|------|
-| OpenAI | `OPENAI_API_KEY` | `gpt-4o-mini` | [docs](https://platform.openai.com/docs/models) |
+| OpenAI | `OPENAI_API_KEY` | `gpt-4o-2024-11-20` | [docs](https://platform.openai.com/docs/models) |
 | Google | `GEMINI_API_KEY` | `gemini-pro` | [docs](https://ai.google.dev/gemini-api/docs/models/gemini) |
 | Anthropic | `ANTHROPIC_API_KEY` | `claude-3-haiku-20240307` | [docs](https://docs.anthropic.com/claude/docs/models-overview) |
 | Replicate | `REPLICATE_API_KEY` | `meta/meta-llama-3-70b-instruct` | [docs](https://replicate.com/collections/language-models) |
