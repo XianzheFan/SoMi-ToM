@@ -38,8 +38,8 @@ def send_video_to_videollama(video_path, question):
     response = processor.batch_decode(output_ids, skip_special_tokens=True)[0].strip()
     return response
 
-def process_excel_file(excel_path, video_base_path=None, num_frames=25, output_file="lvlms_evaluation/output_videoqa/qwenvl_videoqa.txt"):
-# def process_excel_file(excel_path, video_base_path=None, num_frames=25, output_file="lvlms_evaluation/output_videoqa/qwenvl_cot_videoqa.txt"):
+def process_excel_file(excel_path, video_base_path=None, num_frames=25, output_file="output_videoqa/qwenvl_videoqa.txt"):
+# def process_excel_file(excel_path, video_base_path=None, num_frames=25, output_file="output_videoqa/qwenvl_cot_videoqa.txt"):
     df = pd.read_excel(excel_path, header=None)
     with open(output_file, 'w', encoding='utf-8') as f:
         f.write("QwenVL Video QA Results\n")

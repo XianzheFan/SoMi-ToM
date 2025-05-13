@@ -51,7 +51,7 @@ def extract_option(result):
 
 df = pd.read_excel("hinder-realtimeQA-door.xlsx")
 
-with open("lvlms_evaluation/output/hinder_cot_gptrealtime_door_output.txt", "w", encoding="utf-8") as outfile:
+with open("output/hinder_cot_gptrealtime_door_output.txt", "w", encoding="utf-8") as outfile:
     for index, row in df.iterrows():
         image_urls = row['image_url']
         dialogue_history = row['dialogue_history']

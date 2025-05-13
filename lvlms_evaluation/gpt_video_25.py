@@ -49,8 +49,8 @@ def send_images_to_openai(frames_base64, prompt):
         print(f"Error calling OpenAI API: {e}")
         return str(e)
 
-# def process_excel_file(excel_path, video_base_path=None, num_frames=25, output_file="lvlms_evaluation/output_videoqa/gpt_videoqa.txt"):
-def process_excel_file(excel_path, video_base_path=None, num_frames=25, output_file="lvlms_evaluation/output_videoqa/gpt_cot_videoqa.txt"):
+# def process_excel_file(excel_path, video_base_path=None, num_frames=25, output_file="output_videoqa/gpt_videoqa.txt"):
+def process_excel_file(excel_path, video_base_path=None, num_frames=25, output_file="output_videoqa/gpt_cot_videoqa.txt"):
     df = pd.read_excel(excel_path, header=None)
     with open(output_file, 'w', encoding='utf-8') as f:
         f.write("GPT-4o Video QA Results\n")

@@ -46,7 +46,7 @@ async function askQuestionAboutVideo(fileUri, question) {
   return responseText;
 }
 
-async function processExcelFile(excelPath, videoBasePath = null, outputFile = "lvlms_evaluation/output_videoqa/gemini2_cot_videoqa.txt") {
+async function processExcelFile(excelPath, videoBasePath = null, outputFile = "output_videoqa/gemini2_cot_videoqa.txt") {
   try {
     const workbook = XLSX.readFile(excelPath);
     const sheetName = workbook.SheetNames[0];
