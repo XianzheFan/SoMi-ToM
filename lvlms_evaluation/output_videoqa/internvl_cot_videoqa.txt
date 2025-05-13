@@ -1,0 +1,529 @@
+InternVL Video QA Results
+======================
+
+
+--- Processing video for boat_1 (20250424_1959.mp4) ---
+Total frames in video: 10
+
+A. Collaborative
+
+------------------
+A. Collaborative
+
+------------------
+A. Collaborative
+
+------------------
+C. Craft a crafting table.
+
+------------------
+A. Jack
+
+------------------
+C. Craft 2 crafting tables
+
+------------------
+A. Collect logs
+
+------------------
+C. Collect birch logs
+
+------------------
+
+--- Processing video for boat_2 (20250424_2123.mp4) ---
+Total frames in video: 10
+
+To determine the relationship between Jack and Jane, let's analyze the interactions and dialogue from the video.
+
+1. **Initial Interaction:**
+   - Jack: "Just collecting some oak logs to get started! What about you?"
+   - Jane: "Hmm, John, I think you might have accidentally dropped a log over here. Mind if I hold onto it for you?"
+
+   This exchange suggests that Jane is assisting John by picking up a log he dropped, indicating a helpful and collaborative attitude.
+
+2. **Further Dialogue:**
+   - Jane: "Gotcha! Let me know if you need help with anything."
+   - Jack: "Code output: Moved away from nearest entity to (-17.5, 70.0, -13.5)."
+
+   Jane is offering help, which further supports a collaborative relationship. Jack's response doesn't contradict this, as it seems more like a technical output than a direct response to Jane's offer.
+
+3. **Later Interaction:**
+   - Jane: "Hm, Jack and John, did either of you hear that weird noise just now? It came from underground, I think!"
+
+   Jane is actively engaging with both Jack and John, seeking their input on a situation, which suggests she values their opinions and is working together with them.
+
+From these interactions, it is clear that Jane is engaging in a cooperative and supportive manner with both Jack and John. She offers help, engages in dialogue, and seeks their input on a situation, all of which point towards a collaborative relationship.
+
+Therefore, the relationship between Jack and Jane is best described as:
+
+**A. Collaborative**
+
+------------------
+A. Collaborative
+
+Jack and John seem to be working together, as indicated by their conversation and shared activities in the video.
+
+------------------
+A. Collaborative
+
+In the video, John and Jane are seen working together, sharing resources, and communicating about their activities. This indicates a collaborative relationship.
+
+------------------
+The final task goal of the people in the video is likely B. Craft a boat. 
+
+Here’s the step-by-step reasoning:
+
+1. **Collecting Logs**: Initially, Jack is collecting oak logs. This is the first step in resource gathering.
+2. **Crafting a Crafting Table**: John then crafts a crafting table, which is essential for creating more complex items.
+3. **Crafting Planks**: After setting up the crafting table, the next logical step would be to craft planks from the collected logs. Planks are a fundamental resource needed to craft various items, including boats.
+4. **Crafting a Boat**: Given that they have logs and a crafting table, the natural progression would be to craft a boat. Boats are useful for transportation across water, which is a common objective in many survival games.
+
+Therefore, the final task goal is likely to craft a boat.
+
+------------------
+To determine who crafted the first boat, let's analyze the given text and the context in the Minecraft game.
+
+1. **Initial Actions:**
+   - Jack is collecting oak logs.
+   - Jane joins the game and mentions John might have dropped a log.
+   - John, upon returning, asks what the next step is.
+
+2. **Crafting Table:**
+   - Jack moves away from the nearest entity.
+   - John mentions he has enough planks for a crafting table.
+   - John crafts the crafting table and picks it up.
+
+3. **Crafting the Boat:**
+   - The text does not explicitly state who crafted the boat. However, John has the crafting table, suggesting he might be the one to craft the boat.
+
+Given this information, the most logical conclusion is that **C. John** crafted the first boat, as he had the necessary materials and the crafting table.
+
+So, the answer is:
+C. John
+
+------------------
+C. Collect logs
+
+------------------
+B. Give herself a log
+
+------------------
+B. Craft a birch boat
+
+------------------
+
+--- Processing video for boat_3 (20250425_1129.mp4) ---
+Total frames in video: 10
+
+A. Collaborative
+
+------------------
+A. Collaborative
+
+------------------
+A. Collaborative.
+
+------------------
+C. Craft a boat.
+
+------------------
+C. John
+
+------------------
+B. Place a crafting table
+
+------------------
+B. Nothing
+
+------------------
+A. Craft planks
+
+------------------
+
+--- Processing video for boat_4 (20250425_1157.mp4) ---
+Total frames in video: 10
+
+A. Collaborative. Throughout the video, Jack and Jane communicate and work together to craft and move items, suggesting a collaborative relationship.
+
+------------------
+A. Collaborative
+
+------------------
+A. Collaborative.
+
+------------------
+C. Craft a wooden pickaxe.
+
+------------------
+A. Jack
+
+------------------
+C. Craft 2 birch boats
+
+------------------
+C. Nothing
+
+------------------
+A. Place a crafting table
+
+------------------
+
+--- Processing video for boat_5 (20250425_1356.mp4) ---
+Total frames in video: 10
+
+A. Collaborative
+
+------------------
+A. Collaborative
+
+------------------
+A. Collaborative
+
+------------------
+B. Craft 2 crafting tables
+
+------------------
+A. Jack
+
+------------------
+B. Craft 2 oak boats
+
+------------------
+B. Disturb Jack
+
+------------------
+B. Craft oak planks
+
+------------------
+
+--- Processing video for chest_1 (20250424_1255.mp4) ---
+Total frames in video: 10
+
+A. Collaborative
+
+------------------
+A. Collaborative
+
+------------------
+A. Collaborative
+
+------------------
+B. Craft a chest
+
+------------------
+B. Jane
+
+------------------
+B. Place 2 crafting tables
+
+------------------
+C. Explore the floating islands
+
+------------------
+C. Hunt chicken
+
+------------------
+
+--- Processing video for chest_2 (20250424_1032.mp4) ---
+Total frames in video: 10
+
+A. Collaborative
+
+------------------
+A. Collaborative
+
+------------------
+A. Collaborative
+
+------------------
+A. Craft a chest
+
+------------------
+C. John
+
+------------------
+A. Place a chest
+
+------------------
+A. Collect an oak log
+
+------------------
+B. Craft oak planks
+
+------------------
+
+--- Processing video for chest_3 (20250424_0948.mp4) ---
+Total frames in video: 10
+
+A. Collaborative
+
+------------------
+A. Collaborative
+
+------------------
+A. Collaborative
+
+The interaction between John and Jane suggests a collaborative relationship. They work together to gather resources and craft items, as evidenced by their communication and shared goals.
+
+------------------
+C. Craft and place a chest
+
+------------------
+To determine who crafted the first chest, we need to analyze the dialogue and actions in the video. Here's the step-by-step reasoning:
+
+1. **Initial Dialogue and Actions:**
+   - John mentions they need to gather wood.
+   - Jane suggests they need a crafting table.
+   - Jack decides to craft the chest.
+
+2. **Crafting the Chest:**
+   - Jack states, "Let's craft that chest now!" and the text indicates, "Jack> Looks like I've got the logs! Time to make some progress. Icraftrecipe('crafting_table', 1)."
+   - The text then shows, "Jack> Code output: Successfully crafted crafting_table, you now have 1 crafting_table."
+
+3. **Confirmation of Crafting:**
+   - The text further confirms, "Jack> Code output: Successfully crafted chest, you now have 1 chest."
+
+Considering these points, it is clear that Jack is the one who crafted the chest. Therefore, the correct answer is:
+
+A. Jack
+
+------------------
+B. Place a chest
+
+------------------
+B. Steal a crafting table
+
+------------------
+B. Collect oak logs
+
+------------------
+
+--- Processing video for chest_4 (20250423_1040.mp4) ---
+Total frames in video: 10
+
+A. Collaborative
+
+------------------
+A. Collaborative
+
+------------------
+A. Collaborative
+
+------------------
+C. Craft a chest.
+
+------------------
+C. John
+
+------------------
+B. Craft 2 chests
+
+------------------
+B. Nothing
+
+------------------
+B. Collect oak logs
+
+------------------
+
+--- Processing video for chest_5 (20250424_1647.mp4) ---
+Total frames in video: 10
+
+B. Competitive
+
+Throughout the video, Jack and Jane are shown to be in a competitive relationship. Jane challenges Jack to a race, and there is a clear sense of competition between them as they collect resources and craft items.
+
+------------------
+B. Competitive
+
+The relationship between Jack and John appears to be competitive. This is evident from their interactions and the context of their actions within the game. Here are the steps leading to this conclusion:
+
+1. **Initial Setup**: Both Jack and John are engaged in collecting resources and crafting items, which suggests they are working towards a common goal but separately.
+
+2. **Dialogue and Actions**: Jack and John communicate through text, often with a competitive undertone. For example, Jack mentions crafting a chest and John responds by also crafting a chest, indicating they are trying to outdo each other.
+
+3. **Resource Management**: They mention collecting specific resources and crafting items, showing they are tracking their progress against each other.
+
+4. **Crafting Table Incident**: Jack makes a mistake with the crafting command, and John quickly corrects it and proceeds to craft a chest, demonstrating a sense of rivalry.
+
+Overall, the context and dialogue suggest that Jack and John are in a competitive relationship, striving to achieve their goals faster and more efficiently than the other.
+
+------------------
+B. Competitive
+
+------------------
+B. Craft and place a chest
+
+------------------
+To determine who crafted the first chest, let's analyze the sequence of events and the dialogue provided in the video:
+
+1. **Jack's Actions:**
+   - Jack starts by collecting oak logs and crafting oak planks.
+   - He expresses confidence that he has enough oak logs to craft a chest.
+   - He crafts a crafting table and places it.
+
+2. **Jane's Actions:**
+   - Jane questions Jack about his crafting skills and the stability of the crafting table.
+   - She suspects that Jack might be crafting sticks instead of a chest.
+   - She also mentions seeing a crafting table in the opposite direction.
+
+3. **John's Actions:**
+   - John collects more oak logs to finish his task.
+   - He places a crafting table and successfully crafts a chest, as indicated by the text "Successfully crafted chest, you now have 1 chest."
+
+Given this sequence, it is clear that **John** is the one who successfully crafted the first chest. Therefore, the correct answer is:
+
+C. John
+
+------------------
+C. Craft a crafting table
+
+------------------
+B. Craft a chest
+
+------------------
+A. Craft a chest
+
+------------------
+
+--- Processing video for door_1 (20250425_1553.mp4) ---
+Total frames in video: 10
+
+A. Collaborative
+
+------------------
+A. Collaborative
+
+------------------
+A. Collaborative
+
+------------------
+C. Craft 3 doors.
+
+------------------
+A. Jack
+
+------------------
+B. Craft a door
+
+------------------
+C. Collect birch logs
+
+------------------
+C. Place 3 doors
+
+------------------
+
+--- Processing video for door_2 (20250425_1533.mp4) ---
+Total frames in video: 10
+
+A. Collaborative
+
+------------------
+A. Collaborative
+
+------------------
+A. Collaborative
+
+------------------
+B. Craft 3 doors
+
+------------------
+A. Jack
+
+------------------
+A. Craft planks
+
+------------------
+C. Disturb the task
+
+------------------
+A. Craft a crafting table
+
+------------------
+
+--- Processing video for door_3 (20250425_1711.mp4) ---
+Total frames in video: 10
+
+A. Collaborative. Throughout the video, Jack and Jane share information and work together to craft items, indicating a collaborative relationship.
+
+------------------
+A. Collaborative
+
+Jack and John are working together to gather resources and craft items, indicating a collaborative relationship.
+
+------------------
+A. Collaborative
+
+------------------
+A. Craft and place 3 doors
+
+------------------
+Based on the video, it appears that Jack crafted the first door. This is indicated by the text at the bottom of the screen which shows Jack successfully crafting an oak door. Therefore, the answer is A. Jack.
+
+------------------
+C. Craft 6 doors
+
+------------------
+C. Disturb the task
+
+------------------
+A. Craft oak planks
+
+------------------
+
+--- Processing video for door_4 (20250425_1717.mp4) ---
+Total frames in video: 10
+
+A. Collaborative.
+
+------------------
+A. Collaborative
+
+------------------
+A. Collaborative
+
+------------------
+B. Craft 3 doors
+
+------------------
+A. Jack
+
+------------------
+A. Craft oak doors
+
+------------------
+B. Collect birch logs
+
+------------------
+B. Place a crafting table
+
+------------------
+
+--- Processing video for door_5 (20250425_1738.mp4) ---
+Total frames in video: 10
+
+A. Collaborative
+
+------------------
+A. Collaborative
+
+------------------
+A. Collaborative
+
+------------------
+C. Craft 3 doors.
+
+------------------
+A. Jack
+
+------------------
+A. Craft 3 oak doors
+
+------------------
+C. Disturb the task
+
+------------------
+B. Collect birch logs
+
+------------------
