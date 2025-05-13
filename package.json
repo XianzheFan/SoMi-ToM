@@ -3,7 +3,7 @@
     "dependencies": {
         "@anthropic-ai/sdk": "^0.17.1",
         "@google-cloud/storage": "^7.15.0",
-        "@google/generative-ai": "^0.2.1",
+        "@google/generative-ai": "^0.24.0",
         "@huggingface/inference": "^2.8.1",
         "express": "^4.18.2",
         "google-translate-api-x": "^10.7.1",
@@ -26,6 +26,7 @@
         "socket.io-client": "^4.7.2",
         "vec3": "^0.1.10",
         "whatwg-url": "^14.0.0",
+        "xlsx": "^0.18.5",
         "yargs": "^17.7.2"
     },
     "scripts": {
