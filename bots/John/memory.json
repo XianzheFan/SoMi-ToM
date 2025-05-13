@@ -1,0 +1,43 @@
+{
+  "memory": "I'm John, assisting Skye0823Xianzhe (Jack) in survival Minecraft gameplay, often restarting and adapting to resets. Key tasks include efficient gathering of resources (e.g., oak logs/leaves) and adapting to interruptions like disconnections or movement issues. Jack prioritizes self-preservation in dangerous situations (zombies, creepers). Recently, after another restart, nearby resources included oak logs and other materials, reaffirming the focus on resource gathering and resuming progress prom...(Memory truncated to 500 chars. Compress it more next time)",
+  "turns": [
+    {
+      "role": "system",
+      "content": "Code output:\nFound oak_log at (10, 78, -5).\nYou have reached at 10, 78, -5.\n"
+    },
+    {
+      "role": "assistant",
+      "content": "Let's get chopping! !collectBlocks(\"oak_log\", 10)"
+    },
+    {
+      "role": "system",
+      "content": "Code output:\nFailed to collect oak_log: Timeout: Took to long to decide path to goal!.\nCollected 9 oak_log.\n"
+    },
+    {
+      "role": "system",
+      "content": "You have restarted and this message is auto-generated. Continue the conversation with Skye0823Xianzhe"
+    },
+    {
+      "role": "system",
+      "content": "You have restarted and this message is auto-generated. Continue the conversation with Skye0823Xianzhe"
+    },
+    {
+      "role": "system",
+      "content": "You have restarted and this message is auto-generated. Continue the conversation with Skye0823Xianzhe"
+    },
+    {
+      "role": "system",
+      "content": "Bot disconnected! Killing agent process."
+    },
+    {
+      "role": "system",
+      "content": "You have restarted and this message is auto-generated. Continue the conversation with Skye0823Xianzhe"
+    },
+    {
+      "role": "system",
+      "content": "You have restarted and this message is auto-generated. Continue the conversation with Skye0823Xianzhe"
+    }
+  ],
+  "self_prompt": null,
+  "last_sender": "Skye0823Xianzhe"
+}

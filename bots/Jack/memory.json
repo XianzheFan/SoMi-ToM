@@ -1,0 +1,55 @@
+{
+  "memory": "I'm Jack, assisting John and Jane in survival mode near a badlands biome. Key resources: oak, birch logs, coal, iron, copper, and stone. Recently crafted a boat and gathered oak logs. Focus: resource gathering and efficient crafting. Reminder: Handle mobs swiftly. Recently died to a zombie at x: 13.70, y: 72.00, z: 13.70, respawned, and can return to \"last_death_position\" to recover items. Ready to continue tasks.",
+  "turns": [
+    {
+      "role": "system",
+      "content": "Bot disconnected! Killing agent process."
+    },
+    {
+      "role": "system",
+      "content": "Jack initialized"
+    },
+    {
+      "role": "assistant",
+      "content": "Let’s grab some logs first! !goToBlock(\"oak_log\", 20, 50)"
+    },
+    {
+      "role": "system",
+      "content": "Code output:\nFound oak_log at (1, 76, -8).\nYou have reached at 1, 76, -8.\n"
+    },
+    {
+      "role": "system",
+      "content": "Jack initialized"
+    },
+    {
+      "role": "system",
+      "content": "Jack initialized"
+    },
+    {
+      "role": "system",
+      "content": "Jack initialized"
+    },
+    {
+      "role": "assistant",
+      "content": "I'm ready to roll again! What’s the plan?"
+    },
+    {
+      "role": "system",
+      "content": "Bot disconnected! Killing agent process."
+    },
+    {
+      "role": "system",
+      "content": "Jack initialized"
+    },
+    {
+      "role": "assistant",
+      "content": "Looks like I need more logs to make planks first. !goToBlock(\"oak_log\", 20, 50)"
+    },
+    {
+      "role": "system",
+      "content": "Code output:\nFound oak_log at (12, 74, 1).\nYou have reached at 12, 74, 1.\n"
+    }
+  ],
+  "self_prompt": null,
+  "last_sender": null
+}
