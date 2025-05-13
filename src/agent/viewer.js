@@ -185,7 +185,7 @@ export async function callImageRecognitionApi(base64Image) {
             {
                 role: "user",
                 content: [
-                    { type: "text", text: "Please describe the environment in the image, including surrounding materials, blocks, and tools. If you see a player, mention their name (John has purple hair and white clothes, Jane has dark brown hair and yellow clothes, Jack has black hair and green clothes) and describe the action they are performing.", },
+                    { type: "text", text: "Please describe the environment in the image, including surrounding materials, blocks, and tools. If you see a player, mention their name and describe the action they are performing.", },
                     { type: "image_url", image_url: { url: `data:image/jpeg;base64,${base64Image}`, }, },
                 ],
             },
