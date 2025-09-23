@@ -1,4 +1,4 @@
-<h3 align="center" style="font-size:48px; font-weight:bold; color:#9C276A; margin: 0;">
+<h3 align="center" style="font-size:58px; font-weight:bold; color:#9C276A; margin: 0;">
   <a href="https://arxiv.org/abs/2506.23046" style="color:#9C276A; text-decoration: none;">
     SoMi-ToM: Evaluating Multi-Perspective Theory of Mind in Embodied Social Interactions
   </a>
@@ -8,6 +8,18 @@
 </p>
 <p align="center">
   ⭐ If our project helps you, please give us a star on GitHub to support us!
+</p>
+
+<p>
+  <a href="https://arxiv.org/abs/2506.23046">
+    <img src="https://img.shields.io/badge/Paper-PDF-orange.svg" alt="Paper PDF">
+  </a>
+  <a href="https://xianzhefan.github.io/SoMi-ToM">
+    <img src="https://img.shields.io/badge/Project-Page-Green.svg" alt="Project Page">
+  </a>
+  <a href="https://huggingface.co/datasets/SoMi-ToM/SoMi-ToM">
+    <img src="https://img.shields.io/badge/🤗-Hugging_Face-yellow.svg" alt="Hugging Face">
+  </a>
 </p>
 
 # SoMi Embodied Interaction Environment
