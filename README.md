@@ -119,3 +119,7 @@ https://github.com/ProKil/aact
 https://sotopia.world/projects/sotopia
 
 Thanks for their awesome work!
+
+## 📺 Easter Egg: More AI in Minecraft!
+
+For more fascinating videos on AI playing Minecraft, check out the [Emergent Garden YouTube channel](https://www.youtube.com/@EmergentGarden). The codebase for the AI in these videos comes from [kolbytn/mindcraft](https://github.com/kolbytn/mindcraft).
