@@ -10,17 +10,19 @@
   ⭐ If our project helps you, please give us a star on GitHub to support us!
 </p>
 
+<div align="center">
 <p>
   <a href="https://arxiv.org/abs/2506.23046">
     <img src="https://img.shields.io/badge/Paper-PDF-orange.svg" alt="Paper PDF">
   </a>
-  <a href="https://xianzhefan.github.io/SoMi-ToM">
+  <a href="https://github.com/XianzheFan/SoMi-ToM">
     <img src="https://img.shields.io/badge/Project-Page-Green.svg" alt="Project Page">
   </a>
   <a href="https://huggingface.co/datasets/SoMi-ToM/SoMi-ToM">
     <img src="https://img.shields.io/badge/🤗-Hugging_Face-yellow.svg" alt="Hugging Face">
   </a>
 </p>
+</div>
 
 # SoMi Embodied Interaction Environment
 
